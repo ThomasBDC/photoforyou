@@ -1,5 +1,4 @@
 <?php
-echo "coycoy";
     try
                 {
                 	// On se connecte à MySQL
@@ -10,14 +9,14 @@ echo "coycoy";
                 	// En cas d'erreur, on affiche un message et on arrête tout
                         die('Erreur : '.$e->getMessage());
                 }
-                $titre = "tatabdc";
-                    $req = "CALL addAndSelectpictures('".$titre."','".$titre."','".$titre."','".$titre."')";
-                 $reponse = $bdd->query($req);
+                $titre = "totobdc";
+                $req = "CALL addAndSelectpictures('".$titre."','".$titre."','".$titre."','".$titre."')";
+                $reponse = $bdd->query($req);  
 
                 // On affiche chaque entrée une à une
                 while ($data = $reponse->fetch())
                 {
-                    echo $data['idphotos']." ".$data['titre']." ".$data['description']."</br>";
+                    echo "</br><img src=".$data['source']." alt='Smiley face' height='151' width='235' >"."</br>".$data['titre']."</br> ".$data['description']."</br>";
                 }
 
                 $reponse->closeCursor(); // Termine le traitement de la requête

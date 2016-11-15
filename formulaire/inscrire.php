@@ -1,5 +1,5 @@
 <?php
-
+/*
     try
                 {
                 	// On se connecte à MySQL
@@ -23,12 +23,14 @@
                 try
                 {
                      $reponse = $bdd->exec('INSERT INTO users (pseudo, prénom, nom, typeUser, mail, Mdp) VALUES ("'.$_POST['user'].'","'.$_POST['prenom'].'","'.$_POST['nom'].'","'.$letype.'","'.$_POST['mail'].'","'.$_POST['mdp'].'")');
-                } catch (Exception $ex) {
+                     mkdir("C:/wamp/www/PhotoForYouBureau/lesphotos/pictures".$_POST['pseudo'], 0700);
+                }
+                catch (Exception $ex) {
                     echo"une erreur est survenue.";
                 }
                
 
                 echo"ok";
 
-
+*/
 ?>

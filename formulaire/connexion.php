@@ -29,7 +29,7 @@ catch(Exception $e)
 
 // On récupère tout le contenu de la table jeux_video
 
-$reponse = $bdd->query('SELECT mail,Mdp,typeUser FROM users');
+$reponse = $bdd->query('SELECT mail,Mdp,typeUser,pseudo FROM users');
 
 
 // On affiche chaque entrée une à une
@@ -47,6 +47,7 @@ if ($donnees['mail'] == $_POST['mail'] && $donnees['Mdp'] == $_POST['mdp']) {
 		$_SESSION['mail'] = $_POST['mail'];
 		$_SESSION['mdp'] = $_POST['mdp'];
                 $_SESSION['type'] = $donnees['typeUser'];
+                $_SESSION['pseudo'] = $donnees['pseudo'];
                 $trouve = true;
 		// on redirige notre visiteur vers une page de notre section membre
                 // 

@@ -1,6 +1,7 @@
 
 <?php
-$target_dir = "C:/wamp/www/PhotoForYouBureau/users/";
+session_start ();
+$target_dir = "C:/wamp/www/PhotoForYouBureau/lesphotos/pictures/".$_SESSION['pseudo']."/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
@@ -21,7 +22,7 @@ if (file_exists($target_file)) {
     $uploadOk = 0;
 }
 // Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
+if ($_FILES["fileToUpload"]["size"] > 5000000) {
     echo "Sorry, your file is too large.";
     $uploadOk = 0;
 }
@@ -38,8 +39,33 @@ if ($uploadOk == 0) {
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+         try
+                {
+                	// On se connecte à MySQL
+                        $bdd = new PDO('mysql:host=localhost;dbname=photoforyoubureau;charset=utf8', 'root', '');
+                }
+                catch(Exception $e)
+                {
+                	// En cas d'erreur, on affiche un message et on arrête tout
+                        die('Erreur : '.$e->getMessage());
+                }
+                try
+                {
+                     $req = "INSERT INTO `photoforyoubureau`.`photos` (`titre`, `description`, `source`, `pseudoUser`, `tailleX`, `tailleY`) VALUES ('".$_POST['titre']."', '".$_POST['description']."', '".$target_file."', '".$_SESSION['pseudo']."', '6550', '6500')";
+
+                    $reponse = $bdd->exec($req);
+                    // Le visiteur n'a pas été reconnu comme étant membre de notre site. On utilise alors un petit javascript lui signalant ce fait
+		echo '<body onLoad="alert(\'Votre inscription s est bien déroulée, elle fait partie de votre répertoire\')">';
+		// puis on le redirige vers la page d'accueil
+		echo '<meta http-equiv="refresh" content="0;URL=http://localhost/PhotoForYouBureau/mypictures.php">';
+            exit();
+                }
+                catch (Exception $ex) {
+                    echo"une erreur est survenue.";
+                }
     } else {
         echo "Sorry, there was an error uploading your file.";
     }
+     
 }
 ?>

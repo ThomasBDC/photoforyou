@@ -145,6 +145,11 @@ License: Creative Commons Attribution
                 try
                 {
                      $reponse = $bdd->exec('INSERT INTO users (pseudo, prénom, nom, typeUser, mail, Mdp) VALUES ("'.$_POST['user'].'","'.$_POST['prenom'].'","'.$_POST['nom'].'","'.$letype.'","'.$_POST['mail'].'","'.$_POST['mdp'].'")');
+                     if($letype=2)
+                     {
+                          mkdir("C:/wamp/www/PhotoForYouBureau/lesphotos/pictures/".$_POST['user'], 0700);
+                     }
+                    
                 } catch (Exception $ex) {
                     echo"une erreur est survenue.";
                 }

@@ -16,14 +16,18 @@ License: Creative Commons Attribution
     <?php 
         include("include/header.inc.php");
         include("include/cotedroit.inc.php");
-    ?>  
+        if (isset($_SESSION['mail']) AND $_SESSION['type']==2)
+        {
+    ?>
 
     <div id="body">
 		<div id="content">
                     
                   <form action="formulaire/sendphotos.php" method="post" enctype="multipart/form-data">
-                        Select image to upload:
-                        <input type="file" name="fileToUpload" id="fileToUpload">
+                        <input type="text" name="titre" value="titre"></br>
+                        <input type="textArea" name="description" value="description"></br>
+                        Select image to upload:</br>
+                        <input type="file" name="fileToUpload" id="fileToUpload"></br></br>
                         <input type="submit" value="Upload Image" name="submit">
                     </form>
 
@@ -31,6 +35,13 @@ License: Creative Commons Attribution
        
     	<div class="clear"></div>
     </div>
+    <?php
+        }
+        else
+        {
+            echo "Vous n'avez pas accès à cette page !";
+        }
+    ?>  
     <?php 
         include("include/footer.inc.php");
     ?>  
